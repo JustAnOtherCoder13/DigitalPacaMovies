@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "36ae4372-0ce2-4f3b-ad1f-cca0cf22d891",
+		"name": "[Dp-Test-Tech] - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"if(responseJson) {",
+							"    pm.environment.set(\"token\", responseJson.token);",
+							"    pm.environment.set(\"refreshToken\", responseJson.refreshToken);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test-tech-dp-api_front@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "#j3apZAYBAm@Q4T2C!dQa",
+							"type": "text"
+						},
+						{
+							"key": "isAdmin",
+							"value": "false",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://138.68.104.234:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"138",
+						"68",
+						"104",
+						"234"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"if(responseJson) {",
+							"    pm.environment.set(\"token\", responseJson.token);",
+							"    pm.environment.set(\"refreshToken\", responseJson.refreshToken);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "refreshToken",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QtdGVjaC1kcC1hcGlfZnJvbnRAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTYzODM5NDI2NSwiZXhwIjoxNjM4Mzk0ODY1fQ.D75iAcjjekdc39fkNhkBBmNpENSwdh4oKDIJFqyWrlE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://138.68.104.234:8080/auth/refresh",
+					"protocol": "http",
+					"host": [
+						"138",
+						"68",
+						"104",
+						"234"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get series (paginated)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QtdGVjaC1kcC1hcGlfZnJvbnRAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTYzODM5NDI4MywiZXhwIjoxNjM4Mzk0NTgzfQ.i34hP7iL_tGvAMLd0CQE4YLBGKgU16TFCogB-HUnd6I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://138.68.104.234:8080/series",
+					"protocol": "http",
+					"host": [
+						"138",
+						"68",
+						"104",
+						"234"
+					],
+					"port": "8080",
+					"path": [
+						"series"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
