@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TextInput } from "react-native";
+import R from "../assets/theme/R";
 
 class LoginScreen extends React.Component {
-
     render(){
         return(
             <View style = {styles.mainContainer}>
@@ -16,7 +16,7 @@ class LoginScreen extends React.Component {
         return(
             <View style = {styles.logoWhiteCircle}>
                 <Image
-                    source = {require('../assets/DigitalPACA-Logo_Round_poulpe-en-haut.png')}
+                    source = {R.images.digitalPacaLogo}
                     style = {styles.digitalPacaLogo}
                 />
             </View>
@@ -26,14 +26,14 @@ class LoginScreen extends React.Component {
         return(
             <View>
                 <Text style = {styles.loginTitle}>
-                    {"Se Connecter :"}
+                    {R.strings.connect}
                 </Text>
                 <TextInput
-                    placeholder = 'Adresse email'
+                    placeholder = {R.strings.email}
                     style = {styles.textInput}
                 />
                 <TextInput
-                    placeholder = 'Mot de passe'
+                    placeholder = {R.strings.password}
                     style = {styles.textInput}
                 />
             </View>
@@ -45,13 +45,15 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create( {
     mainContainer : {
         flex : 1,
-        backgroundColor : '#03A9F4'
+        backgroundColor : R.colors.secondary,
+        alignItems : 'center'
     },
-    loginTitle : {
-        margin : 5
-    },
+    loginTitle :{...R.typography.h1, ... {
+        margin : 5,
+        color : R.colors.onSecondary,
+    }},
     textInput : {
-        backgroundColor : 'white',
+        backgroundColor : R.colors.primary,
         paddingTop : 5,
         paddingBottom : 5,
         textAlign : 'center',
@@ -63,7 +65,7 @@ const styles = StyleSheet.create( {
     logoWhiteCircle : {
         width : 170,
         height : 170,
-        backgroundColor : 'white',
+        backgroundColor : R.colors.primary,
         borderRadius : 85,
         marginTop : 150,
         marginBottom : 10
@@ -74,8 +76,7 @@ const styles = StyleSheet.create( {
         height : 130,
         margin : 30,
         marginTop : 20,
-        resizeMode : "cover",
-    }
+           }
 })
 
 export default LoginScreen
