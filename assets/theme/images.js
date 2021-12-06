@@ -1,12 +1,13 @@
 const images = {
 
     digitalPacaLogo : require('../DigitalPACA-Logo_Round_poulpe-en-haut.png'),
-    closeIcon : require('../Icon/SVG/close.svg'),
-    homeIcon : require('../Icon/SVG/home.svg'),
-    mailReplyIcon : require('../Icon/SVG/mail-reply.svg'),
-    menuIcon : require('../Icon/SVG/menu.svg'),
-    starOutlinedIcon : require('../Icon/SVG/star-outline.svg'),
-    starIcon : require('../Icon/SVG/star.svg')
+    closeIcon : require('../Icon/PNG/close.png'),
+    homeIcon : require('../Icon/PNG/home.png'),
+    mailReplyIcon : require('../Icon/PNG/mail-reply.png'),
+    menuIcon : require('../Icon/PNG/menu.png'),
+    starOutlinedIcon : require('../Icon/PNG/star-outline.png'),
+    starIcon : require('../Icon/PNG/star.png'),
+    searchIcon : require('../Icon/PNG/search.png')
 }
 
 export default images
