@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import MovieListScreen from './components/MovieListScreen';
 import { Appbar } from 'react-native-paper';
 import R from './assets/theme/R';
+import MovieDetailScreen from './components/MovieDetailScreen';
 
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
           onPress={() => console.log('pressed')}
         />
       </Appbar.Header>
-      <MovieListScreen />
+      <MovieDetailScreen />
     </View>
   );
 }
