@@ -7,7 +7,8 @@ const colors = {
     onSecondary : 'white',
     averageNote : '#3FC25C',
     star : '#F2C94C',
-    undertitle : '#BDBDBD'
+    undertitle : '#BDBDBD',
+    onError : '#FF0000'
 }
 
 export default colors
