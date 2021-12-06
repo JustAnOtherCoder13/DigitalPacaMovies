@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './components/LoginScreen';
+import { View, StyleSheet } from 'react-native';
+import MovieListScreen from './components/MovieListScreen';
+import { Appbar } from 'react-native-paper';
+import R from './assets/theme/R';
+
 
 export default function App() {
   return (
-    
-     <LoginScreen/>
-    
+    <View style = {styles.mainContainer}>
+      <Appbar.Header style={styles.appBar}>
+        <Appbar.Action
+          icon={R.images.menuIcon}
+          color={R.colors.undertitle}
+          onPress={() => console.log('pressed')}
+        />
+      </Appbar.Header>
+      <MovieListScreen />
+    </View>
   );
 }
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  mainContainer: {
+    flex : 1
   },
-});
+  appBar: {
+    backgroundColor: R.colors.onSecondary
+  },
+})
+
