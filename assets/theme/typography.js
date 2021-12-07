@@ -4,14 +4,14 @@ const typography = {
 
     h1 : {
         color : colors.onPrimary,
-        fontSize : 20,
+        fontSize : 27,
         textAlign : 'center',
         fontWeight : 'bold'
     },
 
     h2 : {
         color : colors.undertitle,
-        fontSize : 17,
+        fontSize : 22,
         fontWeight : 'bold'
     },
 
@@ -23,7 +23,7 @@ const typography = {
 
     body1 : {
         color : colors.onPrimary,
-        fontSize : 12
+        fontSize : 17
     },
 
     body2 : {
