@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import SearchView from "./SearchView";
 import R from "../assets/theme/R";
 import MovieItem from "./MovieItem";
