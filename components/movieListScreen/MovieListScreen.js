@@ -6,20 +6,14 @@ import SearchView from "./SearchView";
 
 
 class MovieListScreen extends React.Component {
-
-    //state
-    movieList
-    searchViewText = ''
-
-    //event
-    _onSearchViewtextChange(movieTitle) {
-        this.searchViewText = movieTitle
+    constructor(props){
+        super(props)
+        this.state = {movieList: [{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }]}
     }
-    _onFavIconClicked(isFav) {
-        // update movie to favorite
-    }
-    _onMovieItemClicked(movie) {
+
+    _onMovieItemClicked = (movie) => {
         //nav to detail
+        console.log('nav to detail')
     }
 
     render() {
@@ -28,8 +22,8 @@ class MovieListScreen extends React.Component {
                 <TopAppBar/>
                 <SearchView/>
                 <FlatList
-                    data={[{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }]}// pass with api
-                    renderItem={({ item }) => <MovieItem/>}
+                    data={this.state.movieList}
+                    renderItem={({ item }) => <MovieItem movie={item} onMovieItemClicked={this._onMovieItemClicked}/>}
                 />
             </View>
         )

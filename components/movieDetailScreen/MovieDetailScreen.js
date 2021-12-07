@@ -7,6 +7,13 @@ import TopAppBar from "../common/TopAppBar";
 
 class MovieDetailScreen extends React.Component {
 
+    constructor(props){
+        super(props)
+        this.state = {
+            movie : undefined
+        }
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>

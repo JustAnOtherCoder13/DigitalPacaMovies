@@ -8,7 +8,8 @@ const strings = {
     passwordErrorMessage : 'invalid password, please try again',
     search : 'Rechercher',
     synopsis : 'Synopsis',
-    audienceRating : 'Note du public'
+    audienceRating : 'Note du public',
+    submitButtonText : 'Valider',
 }
 
 export default strings
