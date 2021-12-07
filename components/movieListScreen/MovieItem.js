@@ -1,22 +1,35 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { IconButton } from "react-native-paper";
 import R from "../../assets/theme/R";
 
 
 class MovieItem extends React.Component {
+
+    _onFavIconClicked(isFav) {
+        // update movie to favorite
+        console.log('isFav')
+    }
+
     render() {
+        const { movie, onMovieItemClicked } = this.props
+        console.log(movie)
         return (
-            <View style={styles.item}>
+            <TouchableOpacity 
+            style={styles.item}
+            onPress = {()=> onMovieItemClicked(movie)}
+            >
                 <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
                 <View style={styles.movieInformations} >
                     <View style={styles.movieTitleBlock}>
-                        <Text style={styles.movieTitle} >Movie Title : my movie</Text>
+                        <Text style={styles.movieTitle} >
+                            Movie Title : my movie
+                            </Text>
                         <IconButton
                             icon={R.images.starOutlinedIcon}
                             color={R.colors.undertitle}
                             style={styles.movieFavIcon}
-                            onPress={() => { console.log('isFav') }} />
+                            onPress={() => { this._onFavIconClicked(true) }} />
                     </View>
                     <Text style={styles.movieRelease}>
                         Movie date : 02/12/2021
@@ -31,7 +44,7 @@ class MovieItem extends React.Component {
 
                 </View>
 
-            </View>
+            </TouchableOpacity>
         )
     }
 

@@ -4,24 +4,37 @@ import R from "../../assets/theme/R";
 
 class LoginScreen extends React.Component {
 
-    //state
-    email = '';
-    password = '';
-    isPasswordError = true;
-    isEmailError = false;
+    constructor(props) {
+        super(props)
+        this.email = ''
+        this.password = ''
+        this.state = {
+            isPasswordError: false,
+            isEmailError: false
+        }
+    }
+
     //event
     _onEmailChange(email) { this.email = email }
     _onPasswordChange(password) { this.password = password }
-    _onSubmit(email, password) {
-        this.isEmailError = email == 'admin'
-        this.isPasswordError = password == '000000'
-        if (!this.isEmailError && !this.isPasswordError) {
+    _onSubmit() {
+        this.setState(() => {
+            if (this.email == 'admin') return { isEmailError: false }
+            else return { isEmailError: true }
+        })
+        this.setState(() => {
+            if (this.password == '000000') return { isPasswordError: false }
+            else return { isPasswordError: true }
+        })
+        if (this.email == 'admin' && this.password == '000000') {
             //nav to list
             console.log('navigate')
         }
     }
 
+
     render() {
+        console.log('Render')
         return (
             <View style={styles.mainContainer}>
                 {this._displayDigitalPacaLogo()}
@@ -52,54 +65,45 @@ class LoginScreen extends React.Component {
                     style={styles.textInput}
                     onChangeText={(text) => this._onEmailChange(text)}//pass with event
                 />
-                {this._displayIsEmailError(this.isEmailError)
-                    //pass with states
-                }
+                {this._displayIsEmailError()}
                 <TextInput
                     placeholder={R.strings.password}
                     style={styles.textInput}
                     onChangeText={(text) => this._onPasswordChange(text)}
                 />
-                {this._displayIsPasswordError(this.isPasswordError)
-                    //pass with states
-                }
+                {this._displayIsPasswordError()}
 
                 <Pressable
                     style={styles.submitButton}
-                    onPress={() => this._onSubmit(this.email, this.password)}
+                    onPress={() => this._onSubmit()}
                     backgroundColor={R.colors.secondaryVariant}
                     accessibilityLabel={R.strings.submitLabel}
                 >
-                    <Text
-                        style={styles.buttonText}
-                    >
-                        Submit
+                    <Text style={styles.buttonText}>
+                        {R.strings.submitButtonText}
                     </Text>
                 </Pressable>
             </View>
         )
     }
-    _displayIsEmailError(isEmailError) {
+
+    _displayIsEmailError() {
         //pass with states
-        if (isEmailError) {
+        if (this.state.isEmailError) {
             return (
                 <View>
-                    <Text
-                        style={styles.errorMessage}
-                    >
+                    <Text style={styles.errorMessage} >
                         {R.strings.emailErrorMessage}
                     </Text>
                 </View>
             )
         }
     }
-    _displayIsPasswordError(isPasswordError) {
-        if (isPasswordError) {
+    _displayIsPasswordError() {
+        if (this.state.isPasswordError) {
             return (
                 <View>
-                    <Text
-                        style={styles.errorMessage}
-                    >
+                    <Text style={styles.errorMessage}>
                         {R.strings.passwordErrorMessage}
                     </Text>
                 </View>
