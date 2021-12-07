@@ -14,10 +14,30 @@ class LoginScreen extends React.Component {
         }
     }
 
+    render() {
+        const { navigation } = this.props
+        return (
+            <View style={styles.mainContainer}>
+                {this._displayDigitalPacaLogo()}
+                {this._displayEmailAndPasswordTextInput()}
+                <Pressable
+                    style={styles.submitButton}
+                    onPress={() => this._onSubmit(navigation)}
+                    backgroundColor={R.colors.secondaryVariant}
+                    accessibilityLabel={R.strings.submitLabel}
+                >
+                    <Text style={styles.buttonText}>
+                        {R.strings.submitButtonText}
+                    </Text>
+                </Pressable>
+            </View>
+        )
+    }
+
     //event
     _onEmailChange(email) { this.email = email }
     _onPasswordChange(password) { this.password = password }
-    _onSubmit() {
+    _onSubmit(navigation) {
         this.setState(() => {
             if (this.email == 'admin') return { isEmailError: false }
             else return { isEmailError: true }
@@ -27,22 +47,11 @@ class LoginScreen extends React.Component {
             else return { isPasswordError: true }
         })
         if (this.email == 'admin' && this.password == '000000') {
-            //nav to list
-            console.log('navigate')
+            navigation.navigate('MovieList')
         }
     }
 
-
-    render() {
-        console.log('Render')
-        return (
-            <View style={styles.mainContainer}>
-                {this._displayDigitalPacaLogo()}
-                {this._displayEmailAndPasswordTextInput()}
-            </View>
-        )
-    }
-
+    //ui
     _displayDigitalPacaLogo() {
         return (
             <View style={styles.logoWhiteCircle}>
@@ -63,7 +72,7 @@ class LoginScreen extends React.Component {
                 <TextInput
                     placeholder={R.strings.email}
                     style={styles.textInput}
-                    onChangeText={(text) => this._onEmailChange(text)}//pass with event
+                    onChangeText={(text) => this._onEmailChange(text)}
                 />
                 {this._displayIsEmailError()}
                 <TextInput
@@ -72,23 +81,11 @@ class LoginScreen extends React.Component {
                     onChangeText={(text) => this._onPasswordChange(text)}
                 />
                 {this._displayIsPasswordError()}
-
-                <Pressable
-                    style={styles.submitButton}
-                    onPress={() => this._onSubmit()}
-                    backgroundColor={R.colors.secondaryVariant}
-                    accessibilityLabel={R.strings.submitLabel}
-                >
-                    <Text style={styles.buttonText}>
-                        {R.strings.submitButtonText}
-                    </Text>
-                </Pressable>
             </View>
         )
     }
 
     _displayIsEmailError() {
-        //pass with states
         if (this.state.isEmailError) {
             return (
                 <View>
@@ -137,8 +134,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingTop: 15,
         paddingBottom: 15,
-        marginLeft: 40,
-        marginRight: 40
+        paddingStart: 40,
+        paddingEnd: 40
     },
 
     buttonText: {

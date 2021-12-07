@@ -12,12 +12,11 @@ class MovieItem extends React.Component {
     }
 
     render() {
-        const { movie, onMovieItemClicked } = this.props
-        console.log(movie)
+        const { movie, onMovieItemClicked, navigation } = this.props
         return (
             <TouchableOpacity 
             style={styles.item}
-            onPress = {()=> onMovieItemClicked(movie)}
+            onPress = {()=> onMovieItemClicked(movie, navigation)}
             >
                 <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
                 <View style={styles.movieInformations} >

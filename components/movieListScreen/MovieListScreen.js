@@ -11,19 +11,19 @@ class MovieListScreen extends React.Component {
         this.state = {movieList: [{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }]}
     }
 
-    _onMovieItemClicked = (movie) => {
-        //nav to detail
-        console.log('nav to detail')
+    _onMovieItemClicked = (movie, navigation) => {
+        navigation.navigate('MovieDetail')
     }
 
     render() {
+        const {navigation} = this.props
         return (
             <View style={styles.mainContainer}>
                 <TopAppBar/>
                 <SearchView/>
                 <FlatList
                     data={this.state.movieList}
-                    renderItem={({ item }) => <MovieItem movie={item} onMovieItemClicked={this._onMovieItemClicked}/>}
+                    renderItem={({ item }) => <MovieItem movie={item} onMovieItemClicked={this._onMovieItemClicked} navigation ={navigation}/>}
                 />
             </View>
         )
