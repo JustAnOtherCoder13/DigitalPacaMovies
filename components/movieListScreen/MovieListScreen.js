@@ -1,8 +1,9 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import SearchView from "./SearchView";
-import R from "../assets/theme/R";
+import TopAppBar from "../common/TopAppBar";
 import MovieItem from "./MovieItem";
+import SearchView from "./SearchView";
+
 
 class MovieListScreen extends React.Component {
 
@@ -24,7 +25,8 @@ class MovieListScreen extends React.Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <SearchView />
+                <TopAppBar/>
+                <SearchView/>
                 <FlatList
                     data={[{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }]}// pass with api
                     renderItem={({ item }) => <MovieItem/>}
@@ -34,6 +36,8 @@ class MovieListScreen extends React.Component {
     }
 }
 
+
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -41,12 +45,6 @@ const styles = StyleSheet.create({
     },
     movieList: {
         marginTop: 150
-    },
-    test: {
-        height: 50,
-        width: 50,
-        backgroundColor: R.colors.averageNote
-
     }
 })
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TextInput, StyleSheet, Image } from "react-native";
 import { IconButton } from "react-native-paper";
-import R from "../assets/theme/R";
+import R from "../../assets/theme/R";
 
 class SearchView extends React.Component {
 
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 25, 
       marginStart : 20,
-      marginEnd : 20 
+      marginEnd : 20 ,
     },
+    
     searchTextInput:{
         flex : 1,
         paddingStart : 10

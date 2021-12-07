@@ -17,7 +17,7 @@ const typography = {
 
     h3 : {
         color : colors.undertitle,
-        fontSize : 14,
+        fontSize : 18,
         fontWeight : 'bold'
     },
 

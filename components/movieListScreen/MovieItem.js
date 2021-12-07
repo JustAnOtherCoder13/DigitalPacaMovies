@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { IconButton } from "react-native-paper";
-import R from "../assets/theme/R";
+import R from "../../assets/theme/R";
 
 
 class MovieItem extends React.Component {
@@ -40,7 +40,7 @@ class MovieItem extends React.Component {
 const styles = StyleSheet.create({
 
     item: {
-        height: 150,
+        height: 170,
         flexDirection: 'row',
         backgroundColor: R.colors.onSecondary,
         margin: 20,
@@ -66,13 +66,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'baseline',
-        height: 20,
+        height: 25,
         marginTop: 10,
         marginBottom: 15
     },
 
     movieTitle: {
-        ...R.typography.h2, ...{
+        ...R.typography.h3, ...{
             color: R.colors.onPrimary,
         }
     },
@@ -81,15 +81,16 @@ const styles = StyleSheet.create({
         width: 20,
     },
     movieRelease: {
-        ...R.typography.h3, ...{
+        ...R.typography.body1, ...{
             height: 20,
-            marginBottom: 15
+            marginBottom: 15,
+            color : R.colors.undertitle
         }
     },
 
     movieSynopsis: {
         ...R.typography.body1, ...{
-
+            opacity : 0.5
         }
     }
 
