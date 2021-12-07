@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, } from "react-native";
-import R from "../assets/theme/R";
+import R from "../../assets/theme/R";
 import { IconButton } from "react-native-paper";
+import TopAppBar from "../common/TopAppBar";
 
 
 class MovieDetailScreen extends React.Component {
@@ -9,6 +10,7 @@ class MovieDetailScreen extends React.Component {
     render() {
         return (
             <View style={styles.mainContainer}>
+                <TopAppBar/>
                 <View style={styles.moviePosterBlock}>
                     <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
                 </View>
@@ -30,7 +32,7 @@ class MovieDetailScreen extends React.Component {
                             </Text>
                         </View>
                         <Text style={styles.audienceTitle}>
-                            Note du public
+                            {R.strings.audienceRating}
                         </Text>
                     </View>
                     <View style={styles.detailBlock}>
@@ -49,7 +51,7 @@ class MovieDetailScreen extends React.Component {
                     </View>
                 </View>
                     <Text style={styles.synopsisTitle}>
-                        Synopsis
+                        {R.strings.synopsis}
                     </Text>
                     <Text style={styles.synopsis}>
                         Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
@@ -66,8 +68,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: R.colors.secondaryVariant,
-        paddingStart : 15,
-        paddingEnd : 15
     },
     moviePosterBlock: {
         flexDirection: 'row',
@@ -136,14 +136,16 @@ const styles = StyleSheet.create({
     },
     synopsisTitle: {
         ...R.typography.h2, ...{
-            marginTop : 20
+            marginTop : 20,
+            margin: 10
         }
     },
     synopsis: {
         ...R.typography.body1, ...{
             marginTop : 20,
             color : R.colors.undertitle,
-            opacity : 0.5
+            opacity : 0.5,
+            margin: 10
         }
     }
 })

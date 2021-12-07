@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TextInput, Pressable } from "react-native";
-import R from "../assets/theme/R";
+import R from "../../assets/theme/R";
 
 class LoginScreen extends React.Component {
 

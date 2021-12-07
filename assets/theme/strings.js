@@ -6,7 +6,9 @@ const strings = {
     submitLabel : 'submit password and email',
     emailErrorMessage : 'Please enter valid email',
     passwordErrorMessage : 'invalid password, please try again',
-    search : 'Rechercher'
+    search : 'Rechercher',
+    synopsis : 'Synopsis',
+    audienceRating : 'Note du public'
 }
 
 export default strings
