@@ -6,8 +6,8 @@ class LoginScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        this.email = ''
-        this.password = ''
+        this.email = 'admin'
+        this.password = '000000'
         this.state = {
             isPasswordError: false,
             isEmailError: false
@@ -47,7 +47,7 @@ class LoginScreen extends React.Component {
             else return { isPasswordError: true }
         })
         if (this.email == 'admin' && this.password == '000000') {
-            navigation.navigate('MovieList')
+            navigation.navigate('Home', {screen: 'MovieList'})
         }
     }
 

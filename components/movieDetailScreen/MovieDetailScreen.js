@@ -3,21 +3,23 @@ import { View, StyleSheet, Text, Image, } from "react-native";
 import R from "../../assets/theme/R";
 import { IconButton } from "react-native-paper";
 import TopAppBar from "../common/TopAppBar";
+import DrawerMenu from "../common/DrawerMenu";
 
 
 class MovieDetailScreen extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            movie : undefined
+            movie: undefined
         }
     }
 
     render() {
+        const { navigation } = this.props
         return (
             <View style={styles.mainContainer}>
-                <TopAppBar/>
+                <TopAppBar navigation={navigation} />
                 <View style={styles.moviePosterBlock}>
                     <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
                 </View>
@@ -57,15 +59,15 @@ class MovieDetailScreen extends React.Component {
                         </Text>
                     </View>
                 </View>
-                    <Text style={styles.synopsisTitle}>
-                        {R.strings.synopsis}
-                    </Text>
-                    <Text style={styles.synopsis}>
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                    </Text>
+                <Text style={styles.synopsisTitle}>
+                    {R.strings.synopsis}
+                </Text>
+                <Text style={styles.synopsis}>
+                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
+                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
+                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
+                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
+                </Text>
             </View>
         )
     }
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignItems : 'center',
+        alignItems: 'center',
         borderRightWidth: 1,
         borderRightColor: R.colors.undertitle
     },
@@ -143,15 +145,15 @@ const styles = StyleSheet.create({
     },
     synopsisTitle: {
         ...R.typography.h2, ...{
-            marginTop : 20,
+            marginTop: 20,
             margin: 10
         }
     },
     synopsis: {
         ...R.typography.body1, ...{
-            marginTop : 20,
-            color : R.colors.undertitle,
-            opacity : 0.5,
+            marginTop: 20,
+            color: R.colors.undertitle,
+            opacity: 0.5,
             margin: 10
         }
     }

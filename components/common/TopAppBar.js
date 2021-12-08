@@ -3,15 +3,16 @@ import { Appbar } from 'react-native-paper';
 import R from '../../assets/theme/R';
 import {  StyleSheet } from 'react-native';
 
-
 class TopAppBar extends React.Component {
     render() {
+        const { navigation } = this.props
+
         return (
             <Appbar.Header style={styles.appBar}>
                 <Appbar.Action
                     icon={R.images.menuIcon}
                     color={R.colors.undertitle}
-                    onPress={() => console.log('open drawer')}
+                    onPress={() => navigation.openDrawer()}
                 />
             </Appbar.Header>
         )
