@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import DrawerMenu from "../common/DrawerMenu";
 import TopAppBar from "../common/TopAppBar";
 import MovieItem from "./MovieItem";
 import SearchView from "./SearchView";
