@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
+import DrawerMenu from "../common/DrawerMenu";
 import TopAppBar from "../common/TopAppBar";
 import MovieItem from "./MovieItem";
 import SearchView from "./SearchView";
@@ -12,14 +13,14 @@ class MovieListScreen extends React.Component {
     }
 
     _onMovieItemClicked = (movie, navigation) => {
-        navigation.navigate('MovieDetail')
+        navigation.navigate('Home', {screen:'MovieDetail', params : { movie : movie}})
     }
 
     render() {
         const {navigation} = this.props
         return (
             <View style={styles.mainContainer}>
-                <TopAppBar/>
+                <TopAppBar navigation = {navigation}/>
                 <SearchView/>
                 <FlatList
                     data={this.state.movieList}
