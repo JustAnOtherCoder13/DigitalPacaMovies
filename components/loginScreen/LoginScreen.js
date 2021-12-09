@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TextInput, Pressable } from "react-native";
+import { login } from "../../API/ApiRequest";
 import R from "../../assets/theme/R";
 
 class LoginScreen extends React.Component {
@@ -48,6 +49,7 @@ class LoginScreen extends React.Component {
         })
         if (this.email == 'admin' && this.password == '000000') {
             navigation.navigate('Home', {screen: 'MovieList'})
+            login().then(response=>console.log(response))
         }
     }
 
