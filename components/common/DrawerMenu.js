@@ -8,8 +8,11 @@ import R from "../../assets/theme/R";
 import { IconButton } from "react-native-paper";
 
 const Drawer = createDrawerNavigator();
-function CustomDrawer(porps) {
-    return <DrawerContentScrollView{...porps} contentContainerStyle={styles.drawerContainer}>
+
+function CustomDrawer(props) {
+    return <DrawerContentScrollView{...props}
+        contentContainerStyle={styles.drawerContainer}
+    >
         <View style={styles.mainContainer}>
 
             <View style={styles.logoWhiteCircle}>
@@ -18,16 +21,16 @@ function CustomDrawer(porps) {
                     style={styles.digitalPacaLogo}
                 />
             </View>
-            <Text style = {styles.menuTitle}>
+            <Text style={styles.menuTitle}>
                 Menu
             </Text>
-            <IconButton 
-             icon ={R.images.closeIcon}
-             color = {R.colors.onSecondary}
-             onPress = {()=> console.log('close drawer')}
+            <IconButton
+                icon={R.images.closeIcon}
+                color={R.colors.onSecondary}
+                onPress={() => props.navigation.closeDrawer()}
             />
         </View>
-        <DrawerItemList {...porps} />
+        <DrawerItemList {...props} />
     </DrawerContentScrollView>
 
 }
@@ -37,15 +40,41 @@ class DrawerMenu extends React.Component {
             <Drawer.Navigator
                 initialRouteName="Login"
                 drawerContent={(props) => <CustomDrawer {...props} />}
+
             >
                 <Drawer.Screen name="Home" component={Navigation} options={{
                     headerShown: false,
+                    drawerActiveBackgroundColor: R.colors.secondaryVariant,
+                    drawerLabelStyle: styles.drawerItemText,
+                    drawerItemStyle : styles.drawerItem  ,
+                    drawerIcon: (focused) => (
+                        <IconButton
+                            icon={R.images.homeIcon}
+                            color={focused? R.colors.onSecondary : R.colors.secondaryVariant}
+                        />
+                    )
                 }} />
                 <Drawer.Screen name="Favoris" component={MovieListScreen} options={{
-                    headerShown: false
+                    headerShown: false,
+                    drawerActiveBackgroundColor: R.colors.secondaryVariant,
+                    drawerLabelStyle: styles.drawerItemText,
+                    drawerIcon: () => (
+                        <IconButton
+                            icon={R.images.starOutlinedIcon}
+                            color={R.colors.onSecondary}
+                        />
+                    )
                 }} />
                 <Drawer.Screen name="Deconnexion" component={LoginScreen} options={{
                     headerShown: false,
+                    drawerActiveBackgroundColor: R.colors.secondaryVariant,
+                    drawerLabelStyle: styles.drawerItemText,
+                    drawerIcon: () => (
+                        <IconButton
+                            icon={R.images.mailReplyIcon}
+                            color={R.colors.onSecondary}
+                        />
+                    )
                 }} />
 
             </Drawer.Navigator>
@@ -78,12 +107,20 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         marginTop: 40
     },
-    menuTitle : {...R.typography.h1, ...{
-        color : R.colors.onSecondary
-    }
+    menuTitle: {
+        ...R.typography.h1, ...{
+            color: R.colors.onSecondary
+        },
+    },
+    drawerItemText: {
+        ...R.typography.h3, ...{
+            color: R.colors.onSecondary
+
+        }
+    },
+    drawerItem:{
         
     }
-
 })
 
 export default DrawerMenu
