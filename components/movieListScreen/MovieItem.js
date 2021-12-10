@@ -6,47 +6,39 @@ import R from "../../assets/theme/R";
 
 class MovieItem extends React.Component {
 
-    _onFavIconClicked(isFav) {
-        // update movie to favorite
-        console.log('isFav')
-    }
-
     render() {
-        const { movie, onMovieItemClicked, navigation } = this.props
+        //get function and params from parent
+        const { movie, onMovieItemClicked, onFavIconClick , navigation } = this.props
         return (
-            <TouchableOpacity 
-            style={styles.item}
-            onPress = {()=> onMovieItemClicked(movie, navigation)}
+            <TouchableOpacity
+                style={styles.item}
+                onPress={() => onMovieItemClicked(movie, navigation)}
             >
-                <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
-                <View style={styles.movieInformations} >
-                    <View style={styles.movieTitleBlock}>
-                        <Text style={styles.movieTitle} >
-                            Movie Title : my movie
-                            </Text>
-                        <IconButton
-                            icon={R.images.starOutlinedIcon}
-                            color={R.colors.undertitle}
-                            style={styles.movieFavIcon}
-                            onPress={() => { this._onFavIconClicked(true) }} />
-                    </View>
-                    <Text style={styles.movieRelease}>
-                        Movie date : 02/12/2021
-                    </Text>
-
-                    <Text style={styles.movieSynopsis} numberOfLines={3}>
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                        Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                    </Text>
-
-                </View>
-
+                <Image source={movie.poster_path} style={styles.moviePoster} />
+                {_displayMovieDetail()}
             </TouchableOpacity>
         )
-    }
 
+//ui-----------------------------------------------------------------------------------
+        function _displayMovieDetail() {
+            return <View style={styles.movieInformations}>
+                {_displayMovieTitle()}
+                <Text style={styles.movieRelease}>{movie.release_date}</Text>
+                <Text style={styles.movieSynopsis} numberOfLines={3}> {movie.overview}</Text>
+            </View>;
+        }
+
+        function _displayMovieTitle() {
+            return <View style={styles.movieTitleBlock}>
+                <Text style={styles.movieTitle}>{movie.title}</Text>
+                <IconButton
+                    icon={R.images.starOutlinedIcon}
+                    color={R.colors.undertitle}
+                    style={styles.movieFavIcon}
+                    onPress={() => onFavIconClick(movie)} />
+            </View>;
+        }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -64,9 +56,8 @@ const styles = StyleSheet.create({
 
     moviePoster: {
         width: 130,
-        height: 148,
+        height: 170,
         borderRadius: 10,
-        margin: 1,
         marginEnd: 10,
     },
     movieInformations: {
@@ -96,14 +87,15 @@ const styles = StyleSheet.create({
         ...R.typography.body1, ...{
             height: 20,
             marginBottom: 15,
-            color : R.colors.undertitle
+            color: R.colors.undertitle
         }
     },
 
     movieSynopsis: {
-        ...R.typography.body1, ...{
-            opacity : 0.5
-        }
+        ...R.typography.body2, ...{
+            opacity: 0.5
+        },
+        paddingEnd : 5
     }
 
 })

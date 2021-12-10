@@ -2,13 +2,18 @@ import React from "react";
 import { StyleSheet, View, Image, Text, TextInput, Pressable } from "react-native";
 import { login } from "../../API/ApiRequest";
 import R from "../../assets/theme/R";
+import { screens } from "../../navigation/RouteItem";
+
+const password = '#j3apZAYBAm@Q4T2C!dQa'
+const email = 'test-tech-dp-api_front@gmail.com'
+const emailNecessaryWord = '@'
 
 class LoginScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        this.email = 'admin'
-        this.password = '000000'
+        this.email = email
+        this.password = password
         this.state = {
             isPasswordError: false,
             isEmailError: false
@@ -35,25 +40,7 @@ class LoginScreen extends React.Component {
         )
     }
 
-    //event
-    _onEmailChange(email) { this.email = email }
-    _onPasswordChange(password) { this.password = password }
-    _onSubmit(navigation) {
-        this.setState(() => {
-            if (this.email == 'admin') return { isEmailError: false }
-            else return { isEmailError: true }
-        })
-        this.setState(() => {
-            if (this.password == '000000') return { isPasswordError: false }
-            else return { isPasswordError: true }
-        })
-        if (this.email == 'admin' && this.password == '000000') {
-            navigation.navigate('Home', {screen: 'MovieList'})
-            login().then(response=>console.log(response))
-        }
-    }
-
-    //ui
+    //ui------------------------------------------------------------------------------------
     _displayDigitalPacaLogo() {
         return (
             <View style={styles.logoWhiteCircle}>
@@ -68,9 +55,7 @@ class LoginScreen extends React.Component {
     _displayEmailAndPasswordTextInput() {
         return (
             <View>
-                <Text style={styles.loginTitle}>
-                    {R.strings.connect}
-                </Text>
+                <Text style={styles.loginTitle}> {R.strings.connect}</Text>
                 <TextInput
                     placeholder={R.strings.email}
                     style={styles.textInput}
@@ -110,7 +95,29 @@ class LoginScreen extends React.Component {
         }
     }
 
+    //event----------------------------------------------------------------------
+    _onEmailChange(email) { this.email = email }
+    _onPasswordChange(password) { this.password = password }
+    _onSubmit(navigation) {
+        //check if email contain '@'
+        this.setState(() => {
+            if (this.email.includes(emailNecessaryWord)) return { isEmailError: false }
+            else return { isEmailError: true }
+        })
+        //check password
+        this.setState(() => {
+            if (this.password == password) return { isPasswordError: false }
+            else return { isPasswordError: true }
+        })
+        //if email and password are good navigate to detail
+        if (this.email == email && this.password == password) {
+            navigation.navigate(screens.Home , {screen: screens.MovieList})
+            login(this.email,this.password).then(response=> console.log(response))
+        }
+    }
+
 }
+
 
 const styles = StyleSheet.create({
     mainContainer: {

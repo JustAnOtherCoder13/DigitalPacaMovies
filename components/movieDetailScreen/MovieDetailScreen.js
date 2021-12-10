@@ -3,8 +3,8 @@ import { View, StyleSheet, Text, Image, } from "react-native";
 import R from "../../assets/theme/R";
 import { IconButton } from "react-native-paper";
 import TopAppBar from "../common/TopAppBar";
-import DrawerMenu from "../common/DrawerMenu";
-
+import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class MovieDetailScreen extends React.Component {
 
@@ -12,63 +12,95 @@ class MovieDetailScreen extends React.Component {
         super(props)
         this.state = {
             movie: undefined
-        }
+          }
+    }
+    componentDidUpdate() {
+        console.log("componentDidUpdate : ")
+        console.log(this.props.favoritesFilm)
     }
 
     render() {
-        const { navigation } = this.props
+        console.log(this.props.favoritesMovies)
+        const { route, navigation } = this.props
+        //get movie from route
+        const { movie } = route.params
         return (
             <View style={styles.mainContainer}>
                 <TopAppBar navigation={navigation} />
-                <View style={styles.moviePosterBlock}>
-                    <Image source={R.images.digitalPacaLogo} style={styles.moviePoster} />
-                </View>
-                <View style={styles.titleBlock}>
-                    <Text style={styles.movieTitle}>
-                        Movie Title : my movie
-                    </Text>
-                    <IconButton
-                        icon={R.images.starOutlinedIcon}
-                        color={R.colors.undertitle}
-                        style={styles.favIcon}
-                        onPress={() => { console.log('isFav') }} />
-                </View>
+                {_displayMoviePoster()}
+                {this._displayMovieTitle(movie)}
                 <View style={styles.informationsBlock}>
-                    <View style={styles.audienceBlock}>
-                        <View style={styles.audienceRating}>
-                            <Text style={styles.audienceRatingText}>
-                                85%
-                            </Text>
-                        </View>
-                        <Text style={styles.audienceTitle}>
-                            {R.strings.audienceRating}
-                        </Text>
-                    </View>
-                    <View style={styles.detailBlock}>
-                        <Text style={styles.detailText}>
-                            2h30
-                        </Text>
-                        <Text style={styles.detailText}>
-                            15 décembre 2021
-                        </Text>
-                        <Text style={styles.detailText}>
-                            action/aventure
-                        </Text>
-                        <Text style={styles.detailText}>
-                            tous
-                        </Text>
-                    </View>
+                    {_displayAudienceRating()}
+                    {_diplayMovieDetail()}
                 </View>
-                <Text style={styles.synopsisTitle}>
-                    {R.strings.synopsis}
-                </Text>
-                <Text style={styles.synopsis}>
-                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                    Lorem ipsus sin dolor,Lorem ipsus sin dolor,Lorem ipsus sin dolor,
-                </Text>
+                {_displayMovieSynopsis()}
             </View>
+        )
+
+
+        //UI -----------------------------------------------------------------------------------
+        function _displayMovieSynopsis() {
+            return <View>
+                <Text style={styles.synopsisTitle}>{R.strings.synopsis}</Text>
+                <Text style={styles.synopsis}>{movie.overview}</Text>
+            </View>;
+        }
+
+        function _diplayMovieDetail() {
+            return <View style={styles.detailBlock}>
+                <Text style={styles.detailText}>2h30</Text>
+                <Text style={styles.detailText}>{movie.release_date}</Text>
+                <Text style={styles.detailText}> action/aventure</Text>
+                <Text style={styles.detailText}>tous</Text>
+            </View>;
+        }
+
+        function _displayAudienceRating() {
+            return <View style={styles.audienceBlock}>
+                <View style={styles.audienceRating}>
+                    <Text style={styles.audienceRatingText}>{movie.vote_average + "%"}</Text>
+                </View>
+                <Text style={styles.audienceTitle}>{R.strings.audienceRating} </Text>
+            </View>;
+        }
+
+        function _displayMoviePoster() {
+            return <View style={styles.moviePosterBlock}>
+                <Image source={movie.poster_path} style={styles.moviePoster} />
+            </View>;
+        }
+    }
+
+    //cannot pass movie to toggle favorite.
+    _displayMovieTitle(movie) {
+        return <View style={styles.titleBlock}>
+            <Text style={styles.movieTitle}> {movie.title} </Text>
+            <TouchableOpacity
+            onPress={()=> this._toggleFavorite(movie)}> 
+            {this._displayFavoriteImage(movie)}
+            </TouchableOpacity>
+        </View>;
+    }
+    //send action to reducer, here movie is undefined so don't work
+    _toggleFavorite(movie) {
+        const action = { type: "TOGGLE_FAVORITE", value: movie }
+        this.props.dispatch(action)
+    }
+
+    _displayFavoriteImage(movie) {
+        var sourceImage = R.images.starOutlinedIcon
+        var iconColor = R.colors.onSecondary
+        //if movie is favorite change image and color
+        if (this.props.favoritesMovies.findIndex(item => item.id === movie.id) !== -1) {
+            sourceImage = R.images.starIcon
+            iconColor = R.colors.star
+        }
+        return (
+            <IconButton
+                style={styles.favIcon}
+                icon={sourceImage}
+                color={iconColor}
+            />
         )
     }
 }
@@ -83,8 +115,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     moviePoster: {
-        resizeMode: 'contain',
         height: 300,
+        width: 400,
         backgroundColor: R.colors.undertitle
     },
     titleBlock: {
@@ -159,4 +191,8 @@ const styles = StyleSheet.create({
     }
 })
 
-export default MovieDetailScreen
+const mapStateToProps = (state) => {
+    return {favoritesMovies: state.favoritesMovies}
+}
+
+export default connect(mapStateToProps)(MovieDetailScreen)

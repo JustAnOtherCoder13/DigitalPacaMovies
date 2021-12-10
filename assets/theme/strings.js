@@ -10,6 +10,7 @@ const strings = {
     synopsis : 'Synopsis',
     audienceRating : 'Note du public',
     submitButtonText : 'Valider',
+    menu : 'Menu'
 }
 
 export default strings
