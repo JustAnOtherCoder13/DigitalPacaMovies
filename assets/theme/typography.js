@@ -28,7 +28,7 @@ const typography = {
 
     body2 : {
         color : colors.onPrimary,
-        fontSize : 10
+        fontSize : 15
     }
 }
 

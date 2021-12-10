@@ -11,7 +11,8 @@ class SearchView extends React.Component {
     }
 
     render() {
-        this._filterMoviesByTitle()
+        const { onSearchMovie } = this.props
+
         return (
             <View style={styles.mainContainer} >
                 <IconButton icon={R.images.searchIcon} color={R.colors.undertitle} />
@@ -19,20 +20,12 @@ class SearchView extends React.Component {
                     placeholder={R.strings.search}
                     style={styles.searchTextInput}
                     onChangeText={(text) => {
+                        onSearchMovie(text)
                         this.searchViewText = text
-                        this._filterMoviesByTitle()
-                    }
-
-                    }
+                    }}
                 />
             </View>
         )
-    }
-    _filterMoviesByTitle() {
-        if (this.searchViewText.length > 1) {
-            //search matches
-            console.log('search')
-        }
     }
 }
 

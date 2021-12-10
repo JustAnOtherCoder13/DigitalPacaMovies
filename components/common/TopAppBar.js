@@ -6,7 +6,6 @@ import {  StyleSheet } from 'react-native';
 class TopAppBar extends React.Component {
     render() {
         const { navigation } = this.props
-
         return (
             <Appbar.Header style={styles.appBar}>
                 <Appbar.Action
@@ -18,7 +17,6 @@ class TopAppBar extends React.Component {
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     appBar: {
